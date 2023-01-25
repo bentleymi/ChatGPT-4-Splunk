@@ -8,4 +8,4 @@ Installation:
 
 3. Use the search command: `|chatgpt org="YOUR_ORG_ID" prompt="your prompt"`
 
-![chatresponse1](https://user-images.githubusercontent.com/4107863/214666350-a91672a7-1725-440a-9da3-c3560da037cd.PNG)
+![chatresponsedefault](https://user-images.githubusercontent.com/4107863/214666594-e51536ce-6c51-4f6a-be78-767d6fd382c0.PNG)
