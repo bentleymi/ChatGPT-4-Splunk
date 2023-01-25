@@ -1,7 +1,5 @@
 # ta-openai-chatgpt
 
-**Installation:**
-
 **1. Install using the .spl file**
 
 **2. Add your OpenAI Org & API Key with the setup page:**
