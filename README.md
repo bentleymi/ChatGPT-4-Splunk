@@ -12,9 +12,11 @@ Installation:
 
 
 The command will create a "Completion" request to ChatGPT:
+
 ref: https://beta.openai.com/docs/api-reference/completions/create
 
 The following options are supported by the command:
+
 org - Default: Null - Explanation: Required, the organization ID you added with the setup page
 
 prompt - Explanation: Optional, your chatGPT prompt
