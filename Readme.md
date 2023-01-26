@@ -3,6 +3,7 @@
 **1. Install using the .spl file**
 
 **2. Add your OpenAI Org & API Key with the setup page:**
+
 (ref: https://beta.openai.com/account/org-settings & https://beta.openai.com/account/api-keys)
 
 
