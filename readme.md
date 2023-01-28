@@ -43,4 +43,8 @@ ref: https://beta.openai.com/docs/api-reference/completions/create
 
 ![chatresponse2](https://user-images.githubusercontent.com/4107863/214843173-7ffa4981-9b45-48e8-8cdd-8d26e103cb89.PNG)
 
+**Data cleaning example:**
+
+![data_cleaning](https://user-images.githubusercontent.com/4107863/215242774-ebe9685b-1e39-46ac-97cb-7f10514709cb.png)
+
 
