@@ -36,7 +36,9 @@ ref: https://beta.openai.com/docs/api-reference/completions/create
 **n** - Default: 1 - Explanation: Optional, how many completions to generate for each prompt. Note: Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for max_tokens and stop.
 
 **A simple usage example:**
-|chatgpt org="YOUR_ORG_ID"
+|chatgpt org="YOUR_ORG_ID" prompt="What is the meaning of life according to Monty Python?"
+
+![simple](https://user-images.githubusercontent.com/4107863/215242918-29b3ad0d-b49c-496a-83b7-e8cd75461c6e.png)
 
 **A complex usage example:**
 |chatgpt org="YOUR_ORG_ID" prompt="The number of years it has been since alice in wonderland was written?" temperature=0 max_tokens=512 n=1 
