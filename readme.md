@@ -1,11 +1,10 @@
 # ta-openai-chatgpt
 
-**1. Install using the .spl file**
+**1. Install using the latest tar.gz or .spl file**
 
 **2. Add your OpenAI Org & API Key with the setup page:**
 
 (ref: https://beta.openai.com/account/org-settings & https://beta.openai.com/account/api-keys)
-
 
 ![image](https://user-images.githubusercontent.com/4107863/214665563-7616ddbc-ef22-4289-ba6c-3829fd13746d.png)
 
@@ -19,19 +18,23 @@ ref: https://beta.openai.com/docs/api-reference/completions/create
 
 **The following options are supported by the command:**
 
-**org** - Default: Null - Explanation: Required, the organization ID you added with the setup page
+**org** - Default: null - Explanation: Required, the organization ID you added with the setup page
 
 **prompt** - Explanation: Optional, your chatGPT prompt
 
-**engine** - Default: text-davinci-002 - Explanation: Optional, which GPT3 model to use (ref: https://beta.openai.com/docs/models/gpt-3)
+**model** - Default: text-davinci-003 - Explanation: Optional, which GPT3 model to use (ref: https://beta.openai.com/docs/models/gpt-3)
+
+**task** - Default: completion - Explanation: Optional, the task you wish to complete from this list (Complete,Edit,Moderate)
+
+**instruction** - Default: null - Explanation: Optional, the instruction you want the Edit/Edits to follow.  Note this is only valid when task=edit
 
 **max_tokens** - Default: 1024 - Explanation: Optional, the maximum number of tokens to generate in the completion.
 
-**stop** - Default: Null - Explanation: Optional, up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. 
+**stop** - Default: null - Explanation: Optional, up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. 
 
 **temperature** - Default: 0.5 - Explanation:  Optional, what sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. We generally recommend altering this or temperature but not both.
 
-**top_p** - Default: Null - Explanation:  Optional, an alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
+**top_p** - Default: null - Explanation:  Optional, an alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
 
 **n** - Default: 1 - Explanation: Optional, how many completions to generate for each prompt. Note: Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for max_tokens and stop.
 
