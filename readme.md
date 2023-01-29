@@ -12,9 +12,9 @@
 
 ![chatresponse1](https://user-images.githubusercontent.com/4107863/214673955-b77c6e4c-b628-4b3e-85df-b200dc205036.PNG)
 
-**The command will create a "Completion" request to ChatGPT:**
+**The command will create a "Completion", "Edit" or "Moderate" request to the OpenAI ChatGPT API:**
 
-ref: https://beta.openai.com/docs/api-reference/completions/create
+ref: https://beta.openai.com/docs/api-reference/
 
 **The following options are supported by the command:**
 
