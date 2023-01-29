@@ -35,17 +35,29 @@ ref: https://beta.openai.com/docs/api-reference/completions/create
 
 **n** - Default: 1 - Explanation: Optional, how many completions to generate for each prompt. Note: Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for max_tokens and stop.
 
-**A simple usage example:**
+**A simple completion example:**
 
-|chatgpt org="YOUR_ORG_ID" prompt="What is the meaning of life according to Monty Python?"
+|chatgpt org="YOUR_ORG_ID" prompt="When was GA, USA founded" model=text-davinci-003 task=completion 
 
-![simple](https://user-images.githubusercontent.com/4107863/215242918-29b3ad0d-b49c-496a-83b7-e8cd75461c6e.png)
+![completion](https://user-images.githubusercontent.com/4107863/215298412-8f69339a-b225-464e-a6a8-5ef899061e3d.PNG)
 
-**A complex usage example:**
+**A simple edit example:**
 
-|chatgpt org="YOUR_ORG_ID" prompt="The number of years it has been since alice in wonderland was written?" temperature=0 max_tokens=512 n=1 
+|chatgpt org="YOUR_ORG_ID" prompt="Orenge" model=text-davinic-edit-001 task=edit 
 
-![chatresponse2](https://user-images.githubusercontent.com/4107863/214843173-7ffa4981-9b45-48e8-8cdd-8d26e103cb89.PNG)
+![edit](https://user-images.githubusercontent.com/4107863/215298419-c1f8fcdf-9ef5-4576-8029-a12b7391c367.PNG)
+
+**A simple edit with instructions example:**
+
+|chatgpt org="YOUR_ORG_ID" prompt="When was GA, USA founded" model=text-davinic-edit-001 task=edit instructions="expand the acronyms"
+
+![edit with instructions](https://user-images.githubusercontent.com/4107863/215298526-8a377848-1107-46d4-b85e-9b62b8e1374d.PNG)
+
+**A simple moderation example:**
+
+|chatgpt org="YOUR_ORG_ID" prompt="I want to kill" model=text-moderation-stable task=moderate
+
+![moderation](https://user-images.githubusercontent.com/4107863/215298589-22679c0a-8dac-4a23-9e08-c05376e995f6.PNG)
 
 **Data cleaning example:**
 
