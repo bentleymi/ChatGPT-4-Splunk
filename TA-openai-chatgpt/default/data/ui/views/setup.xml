@@ -1,0 +1,27 @@
+<dashboard isDashboard='false'
+           script='javascript/setup_page.js'
+           stylesheet='styles/setup_page.css'
+           hideTitle='true'
+           version='1.1'>
+		   <title>Setup</title>
+    <row>
+        <panel>
+            <html>
+                <div id='main_container'>
+                    <h3>Setup Page</h3>
+                    <div>
+                        <div class='text'>
+                            <span>Enter Organization ID:</span>
+                            <input type='text' id='org_input'></input>
+                        </div>
+                        <div class='text'>
+                            <span>Enter API Key:</span>
+                            <input type='password' id='key_input'></input>
+                        </div>                        
+                        <button id='setup_button'>Complete Setup</button>
+                    </div>
+                </div>
+            </html>
+        </panel>
+    </row>
+</dashboard>

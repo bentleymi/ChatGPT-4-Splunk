@@ -1,0 +1,4 @@
+<nav search_view="search" color="#ec9960">
+<view name="setup" default="True" label="Setup"/>
+<view name="search" label="Search"/>
+</nav>
