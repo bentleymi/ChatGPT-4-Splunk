@@ -64,6 +64,6 @@ ref: https://beta.openai.com/docs/api-reference/
 
 **Data cleaning examples:**
 
-![data_cleaning](https://user-images.githubusercontent.com/4107863/215242774-ebe9685b-1e39-46ac-97cb-7f10514709cb.png)
+**Getting 5 incorrect spellings of a US City and then using AI to correct the spelling:**
 
 ![dataCleaning](https://user-images.githubusercontent.com/4107863/215340058-1df16182-0e22-453e-9f71-e792552adcb0.PNG)
