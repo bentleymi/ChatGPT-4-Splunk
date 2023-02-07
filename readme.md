@@ -1,4 +1,4 @@
-# ta-openai-chatgpt
+# ta-openai-api
 
 **1. Install using the latest tar.gz or .spl file**
 
