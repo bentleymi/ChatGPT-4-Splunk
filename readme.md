@@ -12,7 +12,7 @@
 
 ![chatresponse1](https://user-images.githubusercontent.com/4107863/214673955-b77c6e4c-b628-4b3e-85df-b200dc205036.PNG)
 
-**The command will create a "Completion", "Edit" or "Moderate" request to the OpenAI ChatGPT API:**
+**The command will create a "Completion", "Edit" or "Moderate" request to the OpenAI API:**
 
 ref: https://beta.openai.com/docs/api-reference/
 
@@ -20,7 +20,7 @@ ref: https://beta.openai.com/docs/api-reference/
 
 **org** - Default: null - Explanation: Required, the organization ID you added with the setup page
 
-**prompt** - Explanation: Optional, your chatGPT prompt
+**prompt** - Explanation: Optional, your prompt, question, or request to OpenAI
 
 **model** - Default: text-davinci-003 - Explanation: Optional, which GPT3 model to use (ref: https://beta.openai.com/docs/models/gpt-3)
 
