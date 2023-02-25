@@ -52,7 +52,7 @@ ref: https://beta.openai.com/docs/api-reference/
 
 **A simple edit with instructions example:**
 
-|chatgpt org="YOUR_ORG_ID" prompt="When was GA, USA founded" model=text-davinic-edit-001 task=edit instructions="expand the acronyms"
+|chatgpt org="YOUR_ORG_ID" prompt="When was GA, USA founded" model=text-davinic-edit-001 task=edit instruction="expand the acronyms"
 
 ![edit with instructions](https://user-images.githubusercontent.com/4107863/215298526-8a377848-1107-46d4-b85e-9b62b8e1374d.PNG)
 
