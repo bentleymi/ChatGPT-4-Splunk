@@ -1,0 +1,11 @@
+tqdm
+
+[:python_version < "3.0"]
+requests[security]>=2.20
+
+[:python_version >= "3.0"]
+requests>=2.20
+
+[dev]
+black==20.8b1
+pytest==6.*

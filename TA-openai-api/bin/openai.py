@@ -150,6 +150,17 @@ def execute():
         openai.api_key, openai.organization = getOpenAIConfig(sessionKey, orgid)
 
         if 'task' in options:
+            if options['task'].lower() in ("chat","chatcompletion"):
+                if model not in ("gpt-3.5-turbo","gpt-3.5-turbo-0301"):
+                    model="gpt-3.5-turbo"
+                response = openai.ChatCompletion.create(
+                    model=model,
+                    messages=[{"role": "user", "content": prompt}],
+                    n=n,
+                    stop=stop,
+                    temperature=temperature,
+                    top_p=top_p,
+                    )
             if options['task'].lower() in ("completion","complete"):
                 if model not in ("text-davinci-001","text-davinci-002","text-davinci-003"):
                     model="text-davinci-003"
@@ -185,12 +196,10 @@ def execute():
                     input=prompt,
                     )
         else:
-            if model not in ("text-davinci-001","text-davinci-002","text-davinci-003"):
-                model="text-davinci-003"
-            response = openai.Completion.create(
+            model="gpt-3.5-turbo"
+            response = openai.ChatCompletion.create(
                 model=model,
-                prompt=prompt,
-                max_tokens=max_tokens,
+                messages=[{"role": "user", "content": prompt}],
                 n=n,
                 stop=stop,
                 temperature=temperature,
