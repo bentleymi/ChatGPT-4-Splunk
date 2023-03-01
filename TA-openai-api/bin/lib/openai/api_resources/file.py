@@ -138,14 +138,9 @@ class File(ListableAPIResource, DeletableAPIResource):
 
         if typed_api_type in (ApiType.AZURE, ApiType.AZURE_AD):
             base = cls.class_url()
-            url = "/%s%s/%s?api-version=%s" % (
-                cls.azure_api_prefix,
-                base,
-                id,
-                api_version,
-            )
+            url = f"/{cls.azure_api_prefix}{base}/{id}/content?api-version={api_version}"
         elif typed_api_type == ApiType.OPEN_AI:
-            url = "%s/%s" % (cls.class_url(), id)
+            url = f"{cls.class_url()}/{id}/content"
         else:
             raise error.InvalidAPIType("Unsupported API type %s" % api_type)
 
@@ -203,7 +198,7 @@ class File(ListableAPIResource, DeletableAPIResource):
             return result.content
 
     @classmethod
-    def __find_matching_files(cls, name, all_files, purpose):
+    def __find_matching_files(cls, name, bytes, all_files, purpose):
         matching_files = []
         basename = os.path.basename(name)
         for f in all_files:
@@ -239,7 +234,7 @@ class File(ListableAPIResource, DeletableAPIResource):
             api_version=api_version,
             organization=organization,
         ).get("data", [])
-        return cls.__find_matching_files(name, all_files, purpose)
+        return cls.__find_matching_files(name, bytes, all_files, purpose)
 
     @classmethod
     async def afind_matching_files(
@@ -263,4 +258,4 @@ class File(ListableAPIResource, DeletableAPIResource):
                 organization=organization,
             )
         ).get("data", [])
-        return cls.__find_matching_files(name, all_files, purpose)
+        return cls.__find_matching_files(name, bytes, all_files, purpose)
