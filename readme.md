@@ -67,3 +67,12 @@ ref: https://beta.openai.com/docs/api-reference/
 **Getting 5 incorrect spellings of a US City and then using AI to correct the spelling:**
 
 ![dataCleaning](https://user-images.githubusercontent.com/4107863/215340058-1df16182-0e22-453e-9f71-e792552adcb0.PNG)
+
+**Chat examples:***!
+
+![gpt3 5](https://user-images.githubusercontent.com/4107863/222264019-bcfde517-17e3-4fa3-8faf-ced9e942f1aa.PNG)
+
+
+
+
+
