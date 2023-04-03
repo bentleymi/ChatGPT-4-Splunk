@@ -76,5 +76,22 @@ ref: https://beta.openai.com/docs/api-reference/
 
 
 
+**Mapping Example:**
+`comment("Grab some data from an internal index and combine it into one field called raw")`
+index=_internal sourcetype=splunk_web_access
+| head 10
+| rename _raw as raw
+| fields raw
+| mvcombine raw
+
+`comment("Ask ChatGPT what's the best sourcetype to use for the data")`
+| map [| openai org={Your ORG HERE} model=gpt-4.0 prompt="What is the best Splunk sourcetype for this data? \n".$raw$]
+
+`comment("Parse the reponse, dropping all but the value of the content field from the response message")`
+| spath input=openai_response
+| rename choices{}.message.content as response
+| table response
+
+![image](https://user-images.githubusercontent.com/4107863/229591925-6cd02d24-e733-41be-af8a-801cc87920f8.png)
 
 
