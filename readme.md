@@ -77,7 +77,8 @@ ref: https://beta.openai.com/docs/api-reference/
 
 
 **Mapping Example:**
-````comment("Grab some data from an internal index and combine it into one field called raw")`
+```
+`comment("Grab some data from an internal index and combine it into one field called raw")`
 index=_internal sourcetype=splunk_web_access
 | head 10
 | rename _raw as raw
