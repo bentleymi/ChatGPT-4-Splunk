@@ -8,7 +8,7 @@
 
 ![image](https://user-images.githubusercontent.com/4107863/214665563-7616ddbc-ef22-4289-ba6c-3829fd13746d.png)
 
-**3. Use the search command: `| openai prompt="your prompt"`**
+**3. Use the search command: `| openai prompt="your prompt"`**   NOTE: org={yourORGID} is no longer supported as of version 2.1.0
 
 ![chatresponse1](https://user-images.githubusercontent.com/4107863/214673955-b77c6e4c-b628-4b3e-85df-b200dc205036.PNG)
 
@@ -95,5 +95,8 @@ index=_internal sourcetype=splunk_web_access
 
 
 Workflow Actions:
+
 ![image](https://user-images.githubusercontent.com/4107863/233700024-2b8a2f6e-91d1-4e75-aa1d-60e367c12a58.png)
+
 ![image](https://user-images.githubusercontent.com/4107863/233700119-bb217dc6-6dee-4613-a601-94c4ac828154.png)
+
