@@ -22,9 +22,10 @@ require([
     async function completeSetup() {
         console.log("setup_page.js completeSetup called");
         // Value of API Key input from openai_setup.xml
-        const keyToSave = $('#key_input').val();
         const pwRealm = "TA-openai-api";
-       const pwName = $('#org_input').val();
+        const org  = $('#org_input').val();
+	const keyToSave = $('#key_input').val();
+
         let stage = 'Initializing the Splunk SDK for Javascript';
         try {
             // Initialize a Splunk Javascript SDK Service instance
@@ -52,7 +53,7 @@ require([
             }
             // The storage passwords key = <realm>:<name>:
             stage = 'Retrieving storagePasswords SDK collection';
-            const passKey = `${pwRealm}:${pwName}`;
+            const passKey = `${pwRealm}:${org}`;
             const passwords = service.storagePasswords(appNamespace);
             await passwords.fetch();
             stage = `Checking for existing password for realm and password name = ${passKey}`;
@@ -66,20 +67,26 @@ require([
                 reloadApp(service);
                 $('.success').show();
                 stage = 'Redirecting to app home page'
-                redirectToApp();
+		// redirectToApp();
             }
             if (!existingPw) {
                 // Secret doesn't exist, create new one
-                stage = `Creating a new password for realm = ${pwRealm} and password name = ${pwName}`;
+                stage = `Creating a new password for realm = ${pwRealm} and password name = ${org}`;
                 passwords.create(
                     {
-                        name: pwName,
+                        name: 'api_key',
                         password: keyToSave,
+                        realm: pwRealm,
+                    });
+                passwords.create(
+                    {
+                        name: 'org_id',
+                        password: org,
                         realm: pwRealm,
                     }, passwordCallback);
             } else {
                 // Secret exists, update to new value
-                stage = `Updating existing password for realm = ${pwRealm} and password name = ${pwName}`;
+                stage = `Updating existing password for realm = ${pwRealm} and password name = ${org}`;
                 existingPw.update(
                     {
                         password: keyToSave,
