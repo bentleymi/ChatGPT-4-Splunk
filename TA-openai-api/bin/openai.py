@@ -33,16 +33,17 @@ logger = dcu.getLogger()
 # Setup namespace
 namespace = "TA-openai-api"
 
-def getOpenAIConfig(sessionKey,organizationId):
+def getOpenAIConfig(sessionKey):
     try:
         service = Service(token=sessionKey)
         passwords = service.storage_passwords
-        response_xml = passwords.get('TA-openai-api:'+organizationId)["body"]
+        response_xml = passwords.get('TA-openai-api:api_key')["body"]
         root = ET.fromstring(str(response_xml))
-
-        password = root.findall(".//*[@name='clear_password']")[0].text
-        orgid = root.findall(".//*[@name='username']")[0].text
-        return password, orgid
+        api_key = root.findall(".//*[@name='clear_password']")[0].text
+        response_xml = passwords.get('TA-openai-api:org_id')["body"]
+        root = ET.fromstring(str(response_xml))
+        org_id = root.findall(".//*[@name='clear_password']")[0].text
+        return api_key, org_id
         
     except Exception as e:
         stack = traceback.format_exc()
@@ -51,7 +52,7 @@ def getOpenAIConfig(sessionKey,organizationId):
 
 def execute():
     try:
-        # get the keywords suplied to the curl command
+        # get the keywords suplied to the command
         argv = splunk.Intersplunk.win32_utf8_argv() or sys.argv
 
         # for each arg
@@ -65,12 +66,7 @@ def execute():
             else:
                 result = pattern.match(arg)
                 options[result.group(1)] = result.group(2)
-        
-        if 'org' in options:
-            orgid = options['org']
-        else:
-            logger.error('You must add your orgid and api key using the setup page and reference it in your search | chatgpt org="yourORG"')
-            
+
         if 'prompt' in options:
             '''
             ref: https://beta.openai.com/docs/api-reference/completions/create
@@ -147,7 +143,7 @@ def execute():
         # get the previous search results and settings
         results,dummyresults,settings = splunk.Intersplunk.getOrganizedResults()
         sessionKey = settings.get("sessionKey")      
-        openai.api_key, openai.organization = getOpenAIConfig(sessionKey, orgid)
+        openai.api_key, openai.organization = getOpenAIConfig(sessionKey)
 
         if 'task' in options:
             if options['task'].lower() in ("chat","chatcompletion"):
