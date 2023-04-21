@@ -8,7 +8,7 @@
 
 ![image](https://user-images.githubusercontent.com/4107863/214665563-7616ddbc-ef22-4289-ba6c-3829fd13746d.png)
 
-**3. Use the search command: `| openai org="YOUR_ORG_ID" prompt="your prompt"`**
+**3. Use the search command: `| openai prompt="your prompt"`**
 
 ![chatresponse1](https://user-images.githubusercontent.com/4107863/214673955-b77c6e4c-b628-4b3e-85df-b200dc205036.PNG)
 
@@ -17,8 +17,6 @@
 ref: https://beta.openai.com/docs/api-reference/
 
 **The following options are supported by the command:**
-
-**org** - Default: null - Explanation: Required, the organization ID you added with the setup page
 
 **prompt** - Explanation: Optional, your prompt, question, or request to OpenAI
 
@@ -40,25 +38,25 @@ ref: https://beta.openai.com/docs/api-reference/
 
 **A simple completion example:**
 
-| openai org="YOUR_ORG_ID" prompt="When was GA, USA founded" model=text-davinci-003 task=completion 
+| openai prompt="When was GA, USA founded" model=text-davinci-003 task=completion 
 
 ![completion](https://user-images.githubusercontent.com/4107863/215298412-8f69339a-b225-464e-a6a8-5ef899061e3d.PNG)
 
 **A simple edit example:**
 
-| openai org="YOUR_ORG_ID" prompt="Orenge" model=text-davinic-edit-001 task=edit 
+| openai prompt="Orenge" model=text-davinic-edit-001 task=edit 
 
 ![edit](https://user-images.githubusercontent.com/4107863/215298419-c1f8fcdf-9ef5-4576-8029-a12b7391c367.PNG)
 
 **A simple edit with instructions example:**
 
-| openai org="YOUR_ORG_ID" prompt="When was GA, USA founded" model=text-davinic-edit-001 task=edit instruction="expand the acronyms"
+| openai prompt="When was GA, USA founded" model=text-davinic-edit-001 task=edit instruction="expand the acronyms"
 
 ![edit with instructions](https://user-images.githubusercontent.com/4107863/215298526-8a377848-1107-46d4-b85e-9b62b8e1374d.PNG)
 
 **A simple moderation example:**
 
-| openai org="YOUR_ORG_ID" prompt="I want to kill" model=text-moderation-stable task=moderate
+| openai prompt="I want to kill" model=text-moderation-stable task=moderate
 
 ![moderation](https://user-images.githubusercontent.com/4107863/215298589-22679c0a-8dac-4a23-9e08-c05376e995f6.PNG)
 
@@ -70,7 +68,7 @@ ref: https://beta.openai.com/docs/api-reference/
 
 **Chat examples:**
 
-| openai org="YOUR_ORG_ID" prompt="write a hello world js please"
+| openai prompt="write a hello world js please"
 
 ![gpt3 5](https://user-images.githubusercontent.com/4107863/222264019-bcfde517-17e3-4fa3-8faf-ced9e942f1aa.PNG)
 
@@ -86,7 +84,7 @@ index=_internal sourcetype=splunk_web_access
 | mvcombine raw
 
 `comment("Ask ChatGPT what's the best sourcetype to use for the data")`
-| map [| openai org={Your ORG HERE} model=gpt-4.0 prompt="What is the best Splunk sourcetype for this data? \n".$raw$]
+| map [| openai model=gpt-4.0 prompt="What is the best Splunk sourcetype for this data? \n".$raw$]
 
 `comment("Parse the reponse, dropping all but the value of the content field from the response message")`
 | spath input=openai_response
@@ -96,3 +94,6 @@ index=_internal sourcetype=splunk_web_access
 ![image](https://user-images.githubusercontent.com/4107863/229591925-6cd02d24-e733-41be-af8a-801cc87920f8.png)
 
 
+Workflow Actions:
+![image](https://user-images.githubusercontent.com/4107863/233700024-2b8a2f6e-91d1-4e75-aa1d-60e367c12a58.png)
+![image](https://user-images.githubusercontent.com/4107863/233700119-bb217dc6-6dee-4613-a601-94c4ac828154.png)
