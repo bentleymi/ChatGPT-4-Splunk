@@ -5,7 +5,7 @@
     "id": {
       "group": null,
       "name": "TA-openai-api",
-      "version": "2.1.0"
+      "version": "2.1.1"
     },
     "author": [
       {
@@ -15,7 +15,7 @@
       }
     ],
     "releaseDate": null,
-    "description": "Send prompts to OpenAI ChatGPT API and enrich your Splunk searches with the results.",
+    "description": "Send prompts to OpenAI ChatGPT APIand enrich your Splunk searches with the results while safeguarding Security and Privacy.",
     "classification": {
       "intendedAudience": null,
       "categories": [],
