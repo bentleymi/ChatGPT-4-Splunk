@@ -18,7 +18,9 @@ ref: https://beta.openai.com/docs/api-reference/
 
 **The following options are supported by the command:**
 
-**prompt** - Explanation: Optional, your prompt, question, or request to OpenAI
+**prompt** - Explanation: Optional, your prompt for OpenAI
+
+**prompt_field** - Explanation: Optional, if streaming data to openai, a field in your result set that you wish to use as a prompt for OpenAI
 
 **model** - Default: gpt-3.5-turbo - Explanation: Optional, which GPT3 model to use (ref: https://beta.openai.com/docs/models/gpt-3)
 
