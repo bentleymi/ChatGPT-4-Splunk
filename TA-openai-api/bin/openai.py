@@ -144,7 +144,12 @@ def execute():
         results,dummyresults,settings = splunk.Intersplunk.getOrganizedResults()
         sessionKey = settings.get("sessionKey")      
         openai.api_key, openai.organization = getOpenAIConfig(sessionKey)
-
+        for result in results:
+            if 'prompt_field' in options:
+                '''
+                Stream the field through as the prompt instead, replaced [\n|\r]+ with \n
+                '''
+                prompt=re.sub(r'[\n\r]+', '\n\n', result[options['field']])
         if 'task' in options:
             if options['task'].lower() in ("chat","chatcompletion"):
                 if model not in ("gpt-3.5-turbo","gpt-3.5-turbo-0301"):
