@@ -24,7 +24,7 @@ ref: https://beta.openai.com/docs/api-reference/
 
 **model** - Default: gpt-3.5-turbo - Explanation: Optional, which GPT3 model to use (ref: https://beta.openai.com/docs/models/gpt-3)
 
-**task** - Default: completion - Explanation: Optional, the task you wish to complete from this list (Complete,Edit,Moderate)
+**task** - Default: chat - Explanation: Optional, the task you wish to complete from this list (Chat,Complete,Edit,Moderate)
 
 **instruction** - Default: null - Explanation: Optional, the instruction you want the Edit/Edits to follow.  Note this is only valid when task=edit
 
