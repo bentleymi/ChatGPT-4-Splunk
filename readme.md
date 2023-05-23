@@ -94,9 +94,14 @@ index=_internal sourcetype=splunk_web_access
 ![image](https://user-images.githubusercontent.com/4107863/229591925-6cd02d24-e733-41be-af8a-801cc87920f8.png)
 
 
-Workflow Actions:
+**Workflow Actions:**
 
 ![image](https://user-images.githubusercontent.com/4107863/233700024-2b8a2f6e-91d1-4e75-aa1d-60e367c12a58.png)
 
 ![image](https://user-images.githubusercontent.com/4107863/233700119-bb217dc6-6dee-4613-a601-94c4ac828154.png)
+
+**Streaming Example:**
+
+![image](https://github.com/bentleymi/ta-openai-api/assets/4107863/a424c828-b38c-4cad-b3f7-b4fdd55872ca)
+
 
