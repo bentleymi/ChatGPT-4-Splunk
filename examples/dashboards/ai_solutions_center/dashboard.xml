@@ -1,0 +1,82 @@
+<form theme="dark" version="1.1" script="voice.js">
+  <label>AI Solutions Center</label>
+  <description>Click an error for help with it from ChatGPT as your Character and Language of choice from the options below:</description>
+  <search id="main">
+    <query>index=_internal log_level=error | top 100 message</query>
+  </search>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="character" searchWhenChanged="true">
+      <label>Character Select</label>
+      <choice value="Hal 9000">Hal 9000</choice>
+      <choice value="Spongebob">Spongebob</choice>
+      <choice value="Waterboy">Waterboy</choice>
+      <choice value="Kermit The Frog">Kermit The Frog</choice>
+      <choice value="Cheech &amp; Chong">Cheech &amp; Chong</choice>
+      <choice value="Donald Trump">Donald Trump</choice>
+      <choice value="Yoda">Yoda</choice>
+      <default>Hal 9000</default>
+      <prefix> </prefix>
+      <suffix> </suffix>
+      <initialValue>Hal 9000</initialValue>
+    </input>
+    <input type="dropdown" token="language" searchWhenChanged="true">
+      <label>Language Select</label>
+      <choice value="zh-CN">Chinese</choice>
+      <choice value="de-DE">Deustch</choice>
+      <choice value="en-US">English</choice>
+      <choice value="es-ES">Spanish</choice>
+      <default>en-US</default>
+      <initialValue>en-US</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table id="mychart">
+        <search base="main">
+          <query>| search message!=*org*
+| fields message percent
+| rename message as Error
+| rename percent as "Percentage of Errors"</query>
+        </search>
+        <option name="count">5</option>
+        <option name="drilldown">cell</option>
+        <drilldown>
+          <set token="string">$row.Error$</set>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="$string$">
+      <table id="mychart2">
+        <title>Character: $character$  |  
+                Language: $language$  |  
+                Error: $string$</title>
+        <search>
+          <query>| openai prompt="rewrite the response from the perspective of $character$ talking to someone and make it so that $character$ explains the solution in character.  Please respond in $language$\n\nError Message:\n\n$string$"
+| spath input=openai_response path=choices{}.message.content output=results
+| fields results
+| rename results as "Possible Solution(s)"</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="speak">$click.value$</set>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row depends="$speak$">
+    <panel>
+      <html>
+        <form id="form">
+          <input id="inputLang" value="$language$" hidden="true"/>
+          <input id="inputTxt" value="$speak$" hidden="true"/>
+          <input id="speakButton" type="button" value="Say it to me!"/>
+          <input id="stopButton" type="button" value="Stop Please!"/>
+        </form>
+      </html>
+    </panel>
+  </row>
+</form>
