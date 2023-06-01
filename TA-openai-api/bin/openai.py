@@ -149,7 +149,7 @@ def execute():
                 '''
                 Stream the field through as the prompt instead, replaced [\n|\r]+ with \n
                 '''
-                prompt=re.sub(r'[\n\r]+', '\n\n', result[options['field']])
+                prompt=re.sub(r'[\n\r]+', '\n\n', result[options['prompt_field']])
         if 'task' in options:
             if options['task'].lower() in ("chat","chatcompletion"):
                 if model not in ("gpt-3.5-turbo","gpt-3.5-turbo-0301"):
