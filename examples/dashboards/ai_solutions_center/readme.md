@@ -1,4 +1,4 @@
-Step 1: Put voice.js in $splunk_home$/etc/apps/search/appserver/static/
+Step 1: Put voice.js in `$splunk_home$/etc/apps/search/appserver/static/`
 
 Step 2: Create a "classic" simple xml dashboard named as you like and then edit the source and paste in the code from dashboard.xml
 
