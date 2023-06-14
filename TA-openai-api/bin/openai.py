@@ -88,8 +88,14 @@ def execute():
         lists of acceptable values
         why manually specifying? because i didn'tt want to slow down the SPL query by 
         adding an additional query to the API for a list of supported models.  Should be in a conf file maybe.
+
+        June 13th 2023 Update:    
+        MODEL NAME	DISCONTINUATION DATE	REPLACEMENT MODEL
+        gpt-3.5-turbo-0301	09/13/2023	gpt-3.5-turbo-0613
+        gpt-4-0314	09/13/2023	gpt-4-0613
+        gpt-4-32k-0314	09/13/2023	gpt-4-32k-0613
         '''
-        chatCompletionModelList = ("gpt-4","gpt-4-0314","gpt-4-32k","gpt-4-32k-0314","gpt-3.5-turbo","gpt-3.5-turbo-0301")
+        chatCompletionModelList = ("gpt-4","gpt-4-0314","gpt-4-0613","gpt-4-32k","gpt-4-32k-0314","gpt-4-32k-0613","gpt-3.5-turbo","gpt-3.5-turbo-0301","gpt-3.5-turbo-0613","gpt-3.5-turbo-16k","gpt-3.5-turbo-16k-0613")        
         completionModelList = ("text-davinci-001","text-davinci-002","text-davinci-003","text-curie-001","text-babbage-001","text-ada-001","davinci","curie","babbage","ada")
         editModelList = ("text-davinci-edit-001","code-davinci-edit-001")
         '''
