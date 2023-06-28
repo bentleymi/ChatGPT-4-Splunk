@@ -29,6 +29,7 @@ exitCodes = {
 import splunk.Intersplunk
 import splunk.mining.dcutils as dcu
 import traceback
+import json
 import re
 import os,sys
 import xml.etree.ElementTree as ET
@@ -113,8 +114,40 @@ def execute():
         top_p = None
         n = None
 
-        '''Get/Set the prompt for chatgpt'''
-        prompt = options.get("prompt", "How long has Michael Bentley been a member of the Splunk Trust?")
+        '''
+        Get/Set the user and system prompts for chatgpt
+        '''
+
+        # Do not output instruction string by default '''
+        showInstruction = False
+
+        if options.get("messages"):
+            # Handle messages field
+            messages = json.loads('['+options.get("messages")+']')
+            showMessges = True
+            prompt = None
+        else:
+            # No messages field given
+            prompt = options.get("prompt", "How long has Michael Bentley been a member of the Splunk Trust?")
+
+            '''The system message can be used to prime the assistant with different personalities or behaviors.'''
+            system_prompt = options.get("system_prompt", "You are a very helpful assistant.")
+
+            '''Typically, a conversation will start with a system message that tells the assistant how to behave,
+            followed by alternating user and assistant messages, but you are not required to follow this format. '''
+            assistant_prompt = str(options.get("assistant_prompt", None))
+        
+            s_prompt = {"role":"system","content":system_prompt}
+            u_prompt = {"role":"user","content":prompt}
+            a_prompt = {"role":"assistant","content":assistant_prompt}
+            messages = []
+            messages.append(s_prompt)
+            messages.append(u_prompt)
+            messages.append(a_prompt)
+
+            # Do not output the messages dict by default '''
+            showMessages = False
+
 
         '''
         model:
@@ -216,12 +249,13 @@ def execute():
         elif options.get("model","") in chatCompletionModelList:
             response = openai.ChatCompletion.create(
                 model=model,
-                messages=[{"role": "user", "content": prompt}],
+                messages=messages,
                 n=n,
                 stop=stop,
                 temperature=temperature,
                 top_p=top_p,
                 )
+            showMessages=True
         elif options.get("model","") in editModelList:
             '''
             edit endpoints require instructions, default to "Fix the Spelling Mistakes" but see if user specified instructions or instruction options first.
@@ -235,6 +269,7 @@ def execute():
                 temperature=temperature,
                 top_p=top_p
                 )
+            showInstruction = True
 
         elif options.get("model","") in moderationModelList:
             response = openai.Moderation.create(
@@ -249,16 +284,31 @@ def execute():
             '''
             response = openai.ChatCompletion.create(
                 model=model,
-                messages=[{"role": "user", "content": prompt}],
+                messages=messages,
                 n=n,
                 stop=stop,
                 temperature=temperature,
                 top_p=top_p,
                 )
+            showMessages=True
         '''
         Now we add the response to the list of results in the splunk search pipeline, and output the data 
         '''
-        results.append({"openai_prompt":str(prompt),"openai_model":model,"openai_response":response})
+        result = {
+            "openai_model":model,
+            "openai_response":response
+        }
+        if showMessages:
+            result["messages"] = str(messages)
+        else:
+            result["prompt"] = str(prompt)
+
+        if showInstruction:
+            result["instruction"] = str(instruction)
+
+
+        results.append(result)
+
         splunk.Intersplunk.outputResults(results)
 
     except Exception as e:
