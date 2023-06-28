@@ -22,6 +22,12 @@ ref: https://beta.openai.com/docs/api-reference/
 
 **prompt_field** - Explanation: Optional, if streaming data to openai, a field in your result set that you wish to use as a prompt for OpenAI
 
+**assistant_prompt** - Explanation: Optional, assistant prompt for OpenAI
+
+**system_prompt** - Explanation: Optional, system prompt for OpenAI
+
+**messages** - Explanation: Optional, escaped JSON array of system, user and assistant prompts such as "{\"role\": \"system\", \"content\": \"You are a child with very limited vocabulary\"}, {\"role\": \"user\", \"content\": \"Please tell me how to make a sandwich\"}, {\"role\": \"assistant\", \"content\": \"None\"}"
+
 **model** - Default: gpt-3.5-turbo - Explanation: Optional, which GPT model to use (ref: https://beta.openai.com/docs/models/).  As of Version 3.0.0, if you choose a completion model, code will genearate a completion task.  If you choose a moderation model, code will generate a moderation task, and so on.
 
 **task** - DEPRECATED in Version 3.0.0+ | Default: chat - Explanation: Optional, the task you wish to complete from this list (Chat,Complete,Edit,Moderate)
@@ -105,5 +111,19 @@ index=_internal sourcetype=splunk_web_access
 **Streaming Example:**
 
 ![image](https://github.com/bentleymi/ta-openai-api/assets/4107863/a424c828-b38c-4cad-b3f7-b4fdd55872ca)
+
+**Additional Prompts Example:**
+```
+| openai prompt="Please tell me how to make a sandwich" system_prompt="Pretend you are a child with very limited vocabulary" assistant_prompt="Maybe act like a cartoon character"
+```
+![additional_prompts](https://github.com/bentleymi/ta-openai-api/assets/4107863/047677ce-bbf7-4da8-ae69-bc404ff3693b)
+
+**Inline Messages Array Example:**
+```
+| openai messages="{\"role\": \"system\", \"content\": \"You are a child with very limited vocabulary\"}, {\"role\": \"user\", \"content\": \"Please tell me how to make a sandwich\"}, {\"role\": \"assistant\", \"content\": \"None\"}"
+```
+![inline_messages](https://github.com/bentleymi/ta-openai-api/assets/4107863/e401f4d2-fba0-42d9-858d-50f6c81b17c6)
+
+
 
 
