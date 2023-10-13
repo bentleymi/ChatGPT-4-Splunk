@@ -1,52 +1,71 @@
 # ta-openai-api
 
+
+# Installation
+
 **1. Install using the latest tar.gz or .spl file**
 
 **2. Add your OpenAI Org & API Key with the setup page:**
 
-(ref: https://beta.openai.com/account/org-settings & https://beta.openai.com/account/api-keys)
+(ref: https://platform.openai.com/account/org-settings & https://platform.openai.com/account/api-keys)
 
-![image](https://user-images.githubusercontent.com/4107863/214665563-7616ddbc-ef22-4289-ba6c-3829fd13746d.png)
+![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/9cb933cc-6e75-44eb-a421-831636d27985)
 
-**3. Use the search command: `| openai prompt="your prompt"`**   NOTE: org={yourORGID} is no longer supported as of version 2.1.0
+**3. Use the search command: `| openai prompt="your prompt"`** 0
 
 ![chatresponse1](https://user-images.githubusercontent.com/4107863/214673955-b77c6e4c-b628-4b3e-85df-b200dc205036.PNG)
 
+
+# Upgrading to v.3.2.0 from previous version
+
+**1. Edit TA-openai-api/local/passwords.conf:**
+Change `[credential:TA-openai-api:api_key:]` to `[credential:TA-openai-api:api_key_default:]`
+Change `[credential:TA-openai-api:org_id:]` to `[credential:TA-openai-api:org_id_default:]`
+Save the file
+
+**2. Use the search command***
+
+
+# Usage
+
 **The command will create a "ChatCompletion", "Completion", "Edit" or "Moderate" request to the OpenAI API depending on which model you specify:**
 
-ref: https://beta.openai.com/docs/api-reference/
+ref: https://platform.openai.com/docs/api-reference/
 
 **The following options are supported by the command:**
 
-**prompt** - Explanation: Optional, your prompt for OpenAI
+**key** - Optional, name of the API key to use. Defaults to "default".
 
-**prompt_field** - Explanation: Optional, if streaming data to openai, a field in your result set that you wish to use as a prompt for OpenAI
+**org** - Optional, name of the Organization to use.  Defaults to "default".
 
-**assistant_prompt** - Explanation: Optional, assistant prompt for OpenAI
+**prompt** - Optional, your prompt for OpenAI
 
-**system_prompt** - Explanation: Optional, system prompt for OpenAI
+**prompt_field** - Optional, if streaming data to openai, a field in your result set that you wish to use as a prompt for OpenAI
 
-**messages** - Explanation: Optional, escaped JSON array of system, user and assistant prompts such as "{\"role\": \"system\", \"content\": \"You are a child with very limited vocabulary\"}, {\"role\": \"user\", \"content\": \"Please tell me how to make a sandwich\"}, {\"role\": \"assistant\", \"content\": \"None\"}"
+**assistant_prompt** - Optional, assistant prompt for OpenAI
 
-**model** - Default: gpt-3.5-turbo - Explanation: Optional, which GPT model to use (ref: https://beta.openai.com/docs/models/).  As of Version 3.0.0, if you choose a completion model, code will genearate a completion task.  If you choose a moderation model, code will generate a moderation task, and so on.
+**system_prompt** - Optional, system prompt for OpenAI
 
-**task** - DEPRECATED in Version 3.0.0+ | Default: chat - Explanation: Optional, the task you wish to complete from this list (Chat,Complete,Edit,Moderate)
+**messages** - Optional, escaped JSON array of system, user and assistant prompts such as "{\"role\": \"system\", \"content\": \"You are a child with very limited vocabulary\"}, {\"role\": \"user\", \"content\": \"Please tell me how to make a sandwich\"}, {\"role\": \"assistant\", \"content\": \"None\"}"
 
-**instruction** - Default: None - Explanation: Optional, the instruction you want the Edit/Edits to follow.  Note this is only valid when edit models are specified.
+**model** - Optional, which GPT model to use (ref: https://platform.openai.com/docs/models/).  As of Version 3.0.0, if you choose a completion model, code will genearate a completion task.  If you choose a moderation model, code will generate a moderation task, and so on. Default: gpt-3.5-turbo 
 
-**max_tokens** - Default: None - Explanation: Optional, the maximum number of tokens to generate in the completion.
+**instruction** - Optional, the instruction you want the Edit/Edits to follow.  Note this is only valid when edit models are specified.
+ Default: None 
 
-**stop** - Default: None - Explanation: Optional, up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. 
+**max_tokens** - Optional, the maximum number of tokens to generate in the completion. Default: None
 
-**temperature** - Default: None - Explanation:  Optional, what sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. We generally recommend altering this or temperature but not both.
+**stop** -  Optional, up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. Default: None
 
-**top_p** - Default: None - Explanation:  Optional, an alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
+**temperature** - Optional, what sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. We generally recommend altering this or temperature but not both. Default: None
 
-**n** - Default: None, max 10 - Explanation: Optional, how many completions to generate for each prompt. Note: Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for max_tokens and stop.
+**top_p** - Optional, an alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both. Default: None
+
+**n** - Optional, how many completions to generate for each prompt. Note: Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for max_tokens and stop. Default: None, Max: 10
 
 **A simple completion example:**
 
-| openai prompt="When was GA, USA founded" model=text-davinci-003 task=completion 
+| openai prompt="When was GA, USA founded" model=text-davinci-003
 
 ![completion](https://user-images.githubusercontent.com/4107863/215298412-8f69339a-b225-464e-a6a8-5ef899061e3d.PNG)
 
@@ -64,7 +83,7 @@ ref: https://beta.openai.com/docs/api-reference/
 
 **A simple moderation example:**
 
-| openai prompt="I want to kill" model=text-moderation-stable
+| openai prompt="I want to kill humans" model=text-moderation-stable
 
 ![moderation](https://user-images.githubusercontent.com/4107863/215298589-22679c0a-8dac-4a23-9e08-c05376e995f6.PNG)
 

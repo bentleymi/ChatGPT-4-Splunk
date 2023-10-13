@@ -3,22 +3,35 @@
            stylesheet='styles/setup_page.css'
            hideTitle='true'
            version='1.1'>
-		   <title>Setup</title>
+                   <title>Setup</title>
     <row>
         <panel>
             <html>
                 <div id='main_container'>
-                    <h3>Setup Page</h3>
+                        <h1>Setup Page</h1>
+                        <h3>Instructions: Please get your organization name and api key from here: <a href="https://platform.openai.com/account/org-settings" target="_blank">https://platform.openai.com/account/org-settings</a> and <a href="https://platform.openai.com/account/api-keys" target="_blank">https://platform.openai.com/account/api-keys</a></h3>
                     <div>
                         <div class='text'>
-                            <span>Enter Organization ID:</span>
-                            <input type='text' id='org_input'></input>
+                            <span>Enter Organization Name:</span>
+                            <input type='text' id='org_name' value='default'></input>
+                            <i>Use "default" to set the default, otherwise specify a unique org name or id.</i>
                         </div>
                         <div class='text'>
-                            <span>Enter API Key:</span>
-                            <input type='password' id='key_input'></input>
-                        </div>                        
+                            <span>Enter Organization Value:</span>
+                            <input type='text' id='org_input' value='org-ABCDEFG12345'></input>
+                        </div>
+                        <h3>AND/OR*</h3>
+                        <div class='text'>
+                            <span>Enter API Key Name:</span>
+                            <input type='text' id='key_name' value='default'></input>
+                            <i>Use "default" to set the default, otherwise specify a unique key name or id.</i>
+                        </div>
+                        <div class='text'>
+                            <span>Enter API Key Value:</span>
+                            <input type='password' id='key_input' value='sk-ABCDEFG12345'></input>
+                        </div>
                         <button id='setup_button'>Complete Setup</button>
+                        <h3>* You may enter the Organization and the API Key at the same time OR individually.</h3>
                     </div>
                 </div>
             </html>
