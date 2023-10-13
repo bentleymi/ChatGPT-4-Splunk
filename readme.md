@@ -1,5 +1,8 @@
 # ta-openai-api
 
+
+# Installation
+
 **1. Install using the latest tar.gz or .spl file**
 
 **2. Add your OpenAI Org & API Key with the setup page:**
@@ -8,9 +11,22 @@
 
 ![image](https://user-images.githubusercontent.com/4107863/214665563-7616ddbc-ef22-4289-ba6c-3829fd13746d.png)
 
-**3. Use the search command: `| openai prompt="your prompt"`**   NOTE: org={yourORGID} is no longer supported as of version 2.1.0
+**3. Use the search command: `| openai prompt="your prompt"`** 0
 
 ![chatresponse1](https://user-images.githubusercontent.com/4107863/214673955-b77c6e4c-b628-4b3e-85df-b200dc205036.PNG)
+
+
+# Upgrading to v.3.2.0 from previous version
+
+**1. Edit TA-openai-api/local/passwords.conf:**
+Change `[credential:TA-openai-api:api_key:]` to `[credential:TA-openai-api:api_key_default:]`
+Change `[credential:TA-openai-api:org_id:]` to `[credential:TA-openai-api:org_id_default:]`
+Save the file
+
+**2. Use the search command***
+
+
+# Usage
 
 **The command will create a "ChatCompletion", "Completion", "Edit" or "Moderate" request to the OpenAI API depending on which model you specify:**
 
