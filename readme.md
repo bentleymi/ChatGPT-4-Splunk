@@ -11,7 +11,7 @@
 
 ![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/9cb933cc-6e75-44eb-a421-831636d27985)
 
-**3. Use the search command: `| openai prompt="your prompt"`** 0
+**3. Use the search command: `| openai prompt="your prompt"`**
 
 ![chatresponse1](https://user-images.githubusercontent.com/4107863/214673955-b77c6e4c-b628-4b3e-85df-b200dc205036.PNG)
 
@@ -26,6 +26,10 @@
 -Save the file
 
 **3. Use the search command**
+
+**4. Note that output field names and sort has changed**
+
+All of the `|openai` command's output fields begin with "openai_" now and are sorted alphabetically.  You may need to update previous searches to handle this change in behavior.
 
 
 # Usage
