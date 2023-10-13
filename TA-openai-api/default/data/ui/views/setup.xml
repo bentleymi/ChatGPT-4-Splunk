@@ -9,13 +9,23 @@
             <html>
                 <div id='main_container'>
                     <h3>Setup Page</h3>
-                    <div>
+		    <div>
+                        <div class='text'>
+                            <span>Enter Organization Name:</span>
+			    <input type='text' id='org_name'></input>
+			    <i>Use "default" to set the default, otherwise specify a unique org name or id.</i>
+                        </div>
                         <div class='text'>
                             <span>Enter Organization ID:</span>
                             <input type='text' id='org_input'></input>
+	                </div>
+                        <div class='text'>
+                            <span>Enter Key Name:</span>
+			    <input type='text' id='key_name'></input>
+			    <i>Use "default" to set the default, otherwise specify a unique key name or id.</i>
                         </div>
                         <div class='text'>
-                            <span>Enter API Key:</span>
+	                    <span>Enter API Key:</span>
                             <input type='password' id='key_input'></input>
                         </div>                        
                         <button id='setup_button'>Complete Setup</button>

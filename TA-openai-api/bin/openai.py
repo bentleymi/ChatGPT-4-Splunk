@@ -50,7 +50,7 @@ def raiseError(e):
     splunk.Intersplunk.generateErrorResults(str(e))
     logger.error(str(e) + ". Traceback: " + str(stack))
 
-def getOpenAIConfig(sessionKey):
+def getOpenAIConfig(sessionKey, orgName = None, keyName = None):
     '''
     getOpenAIConfig uses the sessionKey to authenticate against the password store 
     and retrieve the api_key and org_id to be used in the openAI API queries
@@ -58,10 +58,16 @@ def getOpenAIConfig(sessionKey):
     try:
         service = Service(token=sessionKey)
         passwords = service.storage_passwords
-        response_xml = passwords.get('TA-openai-api:api_key')["body"]
+        if keyName:
+            response_xml = passwords.get('TA-openai-api:api_key_'+keyName)["body"]
+        else:
+            response_xml = passwords.get('TA-openai-api:api_key_default')["body"]
         root = ET.fromstring(str(response_xml))
         api_key = root.findall(".//*[@name='clear_password']")[0].text
-        response_xml = passwords.get('TA-openai-api:org_id')["body"]
+        if orgName:
+            response_xml = passwords.get('TA-openai-api:org_id_'+orgName)["body"]
+        else:
+            response_xml = passwords.get('TA-openai-api:org_id_default')["body"]
         root = ET.fromstring(str(response_xml))
         org_id = root.findall(".//*[@name='clear_password']")[0].text
         return api_key, org_id
@@ -230,7 +236,18 @@ def execute():
             e=exitCodes[7]
             raiseError(e)
             exit(7)
-        openai.api_key, openai.organization = getOpenAIConfig(sessionKey)
+
+        '''
+        Feature request to support multiple api keys
+        '''
+        orgName = None
+        keyName = None
+        if 'org' in options:
+            orgName = options.get("org","default")
+        if 'key' in options:
+            keyName = options.get("key","default")
+        openai.api_key, openai.organization = getOpenAIConfig(sessionKey, orgName, keyName)
+
         if 'prompt_field' in options and results:
             '''
             Stream the field through as the prompt instead, replaced [\n|\r]+ with \n
@@ -299,15 +316,24 @@ def execute():
             "openai_response":response
         }
         if showMessages:
-            result["messages"] = str(messages)
+            result["openai_prompt"] = str(messages)
         else:
-            result["prompt"] = str(prompt)
+            result["openai_prompt"] = str(prompt)
 
         if showInstruction:
-            result["instruction"] = str(instruction)
+            result["openai_instruction"] = str(instruction)
 
+        if orgName == None:
+            result["openai_org"] = "default"
+        else:
+            result["openai_org"] = str(orgName)
 
-        results.append(result)
+        if keyName == None:
+            result["openai_key"] = "default"
+        else:
+            result["openai_key"] = str(keyName)
+        resultSorted = dict(sorted(result.items()))
+        results.append(resultSorted)
 
         splunk.Intersplunk.outputResults(results)
 

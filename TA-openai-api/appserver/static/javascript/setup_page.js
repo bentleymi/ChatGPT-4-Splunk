@@ -23,7 +23,9 @@ require([
         console.log("setup_page.js completeSetup called");
         // Value of API Key input from openai_setup.xml
         const pwRealm = "TA-openai-api";
+	const orgName = $('#org_name').val();
         const org  = $('#org_input').val();
+	const keyName = $('#key_name').val();
 	const keyToSave = $('#key_input').val();
 
         let stage = 'Initializing the Splunk SDK for Javascript';
@@ -74,13 +76,13 @@ require([
                 stage = `Creating a new password for realm = ${pwRealm} and password name = ${org}`;
                 passwords.create(
                     {
-                        name: 'api_key',
+                        name: 'api_key_'+keyName,
                         password: keyToSave,
                         realm: pwRealm,
                     });
                 passwords.create(
                     {
-                        name: 'org_id',
+                        name: 'org_id_'+orgName,
                         password: org,
                         realm: pwRealm,
                     }, passwordCallback);
