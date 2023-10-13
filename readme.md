@@ -9,7 +9,7 @@
 
 (ref: https://platform.openai.com/account/org-settings & https://platform.openai.com/account/api-keys)
 
-![image](https://user-images.githubusercontent.com/4107863/214665563-7616ddbc-ef22-4289-ba6c-3829fd13746d.png)
+![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/9cb933cc-6e75-44eb-a421-831636d27985)
 
 **3. Use the search command: `| openai prompt="your prompt"`** 0
 
