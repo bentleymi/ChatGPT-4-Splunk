@@ -18,12 +18,14 @@
 
 # Upgrading to v.3.2.0 from previous version
 
-**1. Edit TA-openai-api/local/passwords.conf:**
-Change `[credential:TA-openai-api:api_key:]` to `[credential:TA-openai-api:api_key_default:]`
-Change `[credential:TA-openai-api:org_id:]` to `[credential:TA-openai-api:org_id_default:]`
-Save the file
+**1. Upgrade the app using your preferred method**
 
-**2. Use the search command***
+**2. Edit TA-openai-api/local/passwords.conf:**
+-Change `[credential:TA-openai-api:api_key:]` to `[credential:TA-openai-api:api_key_default:]`
+-Change `[credential:TA-openai-api:org_id:]` to `[credential:TA-openai-api:org_id_default:]`
+-Save the file
+
+**3. Use the search command**
 
 
 # Usage
