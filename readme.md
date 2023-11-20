@@ -9,7 +9,12 @@
 
 (ref: https://platform.openai.com/account/org-settings & https://platform.openai.com/account/api-keys)
 
-![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/9cb933cc-6e75-44eb-a421-831636d27985)
+![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/90f9c5f8-2674-4f45-b056-1c90b86ae4b9)
+
+**If you have multiple Orgs & Keys you can add them too:**
+
+![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/a62f0527-c698-4882-b9c1-dcb7952f5fd9)
+
 
 **3. Use the search command: `| openai prompt="your prompt"`**
 
