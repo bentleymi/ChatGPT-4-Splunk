@@ -30,8 +30,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Splunk Details(please complete the following information):**
  - Splunk Version [e.g. 22]
- - Splunk App Name:
- - Splunk App Version  [e.g. 1.0.0]
+ - App Version  [e.g. 1.0.0]
 
 **Additional context**
 Add any other context about the problem here.
