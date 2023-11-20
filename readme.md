@@ -15,6 +15,7 @@
 
 ![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/a62f0527-c698-4882-b9c1-dcb7952f5fd9)
 
+If both a default and other orgs are added, the command will support both syntax, but if an org and key ar not specified, it will use the default.
 
 **3. Use the search command: `| openai prompt="your prompt"`**
 
