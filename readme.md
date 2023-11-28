@@ -156,7 +156,7 @@ index=_internal sourcetype=splunk_web_access
 ![inline_messages](https://github.com/bentleymi/ta-openai-api/assets/4107863/e401f4d2-fba0-42d9-858d-50f6c81b17c6)
 
 
-##TROUBLESHOOTING
+# TROUBLESHOOTING
 1. Error "No such organization: org-ABCDEFG12345" indicates that you did not configure the correct default org.  Please remove the defaults from $SPLUNK_HOME/etc/apss/TA-openai-api\local\passwords.conf, and setup a default org and api key from the setup page.
 
 Delete:
