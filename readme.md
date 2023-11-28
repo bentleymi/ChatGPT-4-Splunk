@@ -156,5 +156,12 @@ index=_internal sourcetype=splunk_web_access
 ![inline_messages](https://github.com/bentleymi/ta-openai-api/assets/4107863/e401f4d2-fba0-42d9-858d-50f6c81b17c6)
 
 
+#TROUBLESHOOTING#
+1. Error "No such organization: org-ABCDEFG12345" indicates that you did not configure the correct default org.  Please remove the defaults from $SPLUNK_HOME/etc/apss/TA-openai-api\local\passwords.conf, and setup a default org and api key from the setup page.
 
+Delete:
+![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/00fba19c-6b58-4d3e-a6b4-edc514905f7b)
+
+Setup a default:
+![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/49e8a1a9-1764-4b27-a138-cf9d4de3cc3e)
 
