@@ -65,7 +65,7 @@ ref: https://platform.openai.com/docs/api-reference/
 **instruction** - Optional, the instruction you want the Edit/Edits to follow.  Note this is only valid when edit models are specified.
  Default: None 
 
-**max_tokens** - Optional, the maximum number of tokens to generate in the completion. Default: None
+**max_tokens** - Optional, the maximum number of tokens to generate in the completion. Default: None - Please reach out to the developer to increase this limit
 
 **stop** -  Optional, up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. Default: None
 
@@ -166,3 +166,4 @@ Delete:
 Setup a default:
 ![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/49e8a1a9-1764-4b27-a138-cf9d4de3cc3e)
 
+NOTE: In earlier versions of ChatGPT-4-Splunk ( < V3.2.0 ) Splunk Cloud users may have to uninstall and reinstall the app in order to reset their api key.  

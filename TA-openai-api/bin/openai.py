@@ -1,6 +1,6 @@
 '''
 Author: Michael Camp Bentley aka JKat54
-Copyright 2023 Michael Camp Bentley
+Copyright 2022 Michael Camp Bentley
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ DESCRIPTION: allows splunk to query openai api
 
 exitCodes = {
     1: "Unrecognized Model: Please check the spelling of your model and try again.",
-    2: "max_tokens out of bounds: Please specify an integer between 0 and 1024.",
+    2: "max_tokens out of bounds: Please specify an integer between 0 and 1024. To increase this limit, reach out m@ableversity.com",
     3: "temperature out of bounds: Please specify a float between 0 and 1.",
     4: "top_p out of bounds: Please specify a float between 0 and 1.",
     5: "n out of bounds: Please specify an integer between 1 and 10.",
@@ -93,7 +93,7 @@ def execute():
 
         '''
         lists of acceptable values
-        why manually specifying? because i didn'tt want to slow down the SPL query by 
+        why manually specifying? because i didn't want to slow down the SPL query by 
         adding an additional query to the API for a list of supported models.  Should be in a conf file maybe.
 
         June 13th 2023 Update:    
@@ -101,17 +101,44 @@ def execute():
         gpt-3.5-turbo-0301	09/13/2023	gpt-3.5-turbo-0613
         gpt-4-0314	09/13/2023	gpt-4-0613
         gpt-4-32k-0314	09/13/2023	gpt-4-32k-0613
+        gpt-4-32k-0613  TBD  gpt-4-turbo
+        gpt-4-32k  TBD  gpt-4-turbo
+        
+        TBD:
+        gpt-4-1106-vision-preview
+        gpt-4-vision-preview
+        gpt-3.5-turbo-instruct
+        dall-e
+        tts      
+        
+        Michael's method of testing many models at one time:
+        
+        | makeresults count=1
+        | fields - _time
+        | eval chatCompletionModelList=" gpt-40 gpt-4-1106-preview gpt-4-0125-preview gpt-4-turbo-preview gpt-4-turbo-2024-04-09 gpt-4-turbo gpt-4 gpt-4-0613 gpt-4-32k gpt-4-32k-0613 gpt-3.5-turbo gpt-3.5-turbo-instruct gpt-3.5-turbo-0613 gpt-3.5-turbo-0125 gpt-3.5-turbo-1106 gpt-3.5-turbo-16k gpt-3.5-turbo-16k-0613"
+        | makemv chatCompletionModelList
+        | mvexpand chatCompletionModelList
+        | map search="|openai model=$chatCompletionModelList$"
         '''
-        chatCompletionModelList = ("gpt-4","gpt-4-0314","gpt-4-0613","gpt-4-32k","gpt-4-32k-0314","gpt-4-32k-0613","gpt-3.5-turbo","gpt-3.5-turbo-0301","gpt-3.5-turbo-0613","gpt-3.5-turbo-16k","gpt-3.5-turbo-16k-0613")        
-        completionModelList = ("text-davinci-001","text-davinci-002","text-davinci-003","text-curie-001","text-babbage-001","text-ada-001","davinci","curie","babbage","ada")
+        
+        chatCompletionModelList = ("gpt-4o","gpt-4o-2024-05-13","gpt-40","gpt-4-1106-preview","gpt-4-0125-preview","gpt-4-turbo-preview","gpt-4-turbo-2024-04-09","gpt-4-turbo","gpt-4","gpt-4-0613","gpt-3.5-turbo","gpt-3.5-turbo-instruct","gpt-3.5-turbo-0613","gpt-3.5-turbo-0125","gpt-3.5-turbo-1106","gpt-3.5-turbo-16k","gpt-3.5-turbo-16k-0613")        
+        completionModelList = ("text-davinci-001","text-davinci-002","text-davinci-003","text-curie-001","text-babbage-001","text-ada-001","davinci","curie","babbage","ada","babbage-002","davinci-002")
+        
         editModelList = ("text-davinci-edit-001","code-davinci-edit-001")
+        
+        #TBD: dallEModelList = ("dall-e-3","dall-e-2")
+        
+        #TBD: ttsModelList = ("tts-1","tts-1-hd")
+        
         '''
         Embedding doesnt work in latest Splunk 9.0.5 due to numpy dependency on python version 3.8+ 
         embeddingModelList = ("text-embedding-ada-002", "text-search-ada-doc-001")
         '''
+        
         moderationModelList = ("text-moderation-stable","text-moderation-latest")
-        modelList = chatCompletionModelList + completionModelList  + editModelList + moderationModelList # + embeddingModelList
-        taskList = ("chat","chatcompletion","completion","complete","edits","edit","moderations","moderate")
+   
+        modelList = chatCompletionModelList + completionModelList  + editModelList + moderationModelList # ttsModelList + embeddingModelList + dallEModelList
+
 
         '''Setting defaults for the request, to be overriden by options passed to the command'''
         max_tokens = None
@@ -166,7 +193,8 @@ def execute():
             e = "Unrecognized Model: Please check the spelling of your model and try again.  The following models are available: "+str(modelList)
             raiseError(e)
             exit(1)
-
+        if model == "gpt-40":
+            model = "gpt-4o"
         '''
         max_tokens:
         ref: https://beta.openai.com/docs/api-reference/completions/create
