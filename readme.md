@@ -166,3 +166,4 @@ Delete:
 Setup a default:
 ![image](https://github.com/bentleymi/ChatGPT-4-Splunk/assets/4107863/49e8a1a9-1764-4b27-a138-cf9d4de3cc3e)
 
+NOTE: In earlier versions of ChatGPT-4-Splunk ( < V3.2.0 ) Splunk Cloud users may have to uninstall and reinstall the app in order to reset their api key.  
