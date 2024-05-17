@@ -35,7 +35,7 @@ export async function perform(splunk_js_sdk, setup_options) {
                   {console.warn(err);}
               else {
               // Secret was created successfully
-               console.log(storagePassword.properties());
+              // console.log(storagePassword.properties());
                }
          });
         // Completes the setup, by access the app.conf's [install]

@@ -65,7 +65,7 @@ ref: https://platform.openai.com/docs/api-reference/
 **instruction** - Optional, the instruction you want the Edit/Edits to follow.  Note this is only valid when edit models are specified.
  Default: None 
 
-**max_tokens** - Optional, the maximum number of tokens to generate in the completion. Default: None
+**max_tokens** - Optional, the maximum number of tokens to generate in the completion. Default: None - Please reach out to the developer to increase this limit
 
 **stop** -  Optional, up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. Default: None
 
