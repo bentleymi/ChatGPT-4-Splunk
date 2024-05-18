@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "2.0.0",
+  "info": {
+    "title": "OpenAI API",
+    "id": {
+      "group": "TA",
+      "name": "openai-api",
+      "version": "3.3.0"
+    },
+    "author": [{"name":"Michael \"JKat54\" Bentley","email":"m@ableversity.com","company":"Ableversity Incorporated"}],
+    "releaseDate": "5/17/2024",
+    "description": "Send queries to OpenAI ChatGPT API and enrich your Splunk searches with the results while safeguarding Security and Privacy.",
+    "classification": {
+      "intendedAudience": "IT",
+      "categories": ["IT Operations"],
+      "developmentStatus": "Production/Latest"
+    },
+    "commonInformationModels": null,
+    "license": {
+      "name": "Apache APL v2.0",
+      "text": "See LICENSE file at https://github.com/bentleymi/ChatGPT-4-Splunk/blob/main/LICENSE",
+      "uri": "https://github.com/bentleymi/ChatGPT-4-Splunk/blob/main/LICENSE"
+    },
+    "privacyPolicy": {
+      "name": null,
+      "text": null,
+      "uri": null
+    },
+    "releaseNotes": {
+      "name": null,
+      "text": null,
+      "uri": null
+    }
+  },
+  "dependencies": null,
+  "tasks": null,
+  "inputGroups": null,
+  "incompatibleApps": null,
+  "platformRequirements": null,
+  "supportedDeployments": [
+    "_standalone",
+    "_distributed"
+  ],
+  "targetWorkloads": null
+}
