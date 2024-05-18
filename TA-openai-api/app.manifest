@@ -3,9 +3,9 @@
   "info": {
     "title": "OpenAI API",
     "id": {
-      "group": "TA",
-      "name": "openai-api",
-      "version": "3.3.0"
+      "group": null,
+      "name": "TA-openai-api",
+      "version": "3.3.1"
     },
     "author": [{"name":"Michael \"JKat54\" Bentley","email":"m@ableversity.com","company":"Ableversity Incorporated"}],
     "releaseDate": "5/17/2024",
@@ -18,7 +18,7 @@
     "commonInformationModels": null,
     "license": {
       "name": "Apache APL v2.0",
-      "text": "See LICENSE file at https://github.com/bentleymi/ChatGPT-4-Splunk/blob/main/LICENSE",
+      "text": "LICENSE",
       "uri": "https://github.com/bentleymi/ChatGPT-4-Splunk/blob/main/LICENSE"
     },
     "privacyPolicy": {
