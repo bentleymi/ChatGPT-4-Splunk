@@ -82,7 +82,7 @@ def execute():
         # for each arg
         first = True
         options = {}
-        pattern=re.compile(r"^\s*([^=]+)=(.*)")
+        pattern=re.compile("^\s*([^=]+)=(.*)")
         for arg in argv:
             if first:
                 first = False
@@ -119,45 +119,25 @@ def execute():
         | makemv chatCompletionModelList
         | mvexpand chatCompletionModelList
         | map search="|openai model=$chatCompletionModelList$"
-        
-        To list all available models from the API, use: |openai list_models=true
         '''
         
-        results,dummyresults,settings = splunk.Intersplunk.getOrganizedResults()
-        sessionKey = settings.get("sessionKey") if settings else None
-        
-        if options.get("list_models") and options.get("list_models").lower() == "true":
-            try:
-                if not sessionKey:
-                    raiseError("sessionKey not found. Make sure enableHeader and passAuth are enabled in commands.conf.")
-                    return
-                api_key, org_id = getOpenAIConfig(sessionKey, None, None)
-                openai.api_key = api_key
-                openai.organization = org_id
-                models_response = openai.Model.list()
-                model_ids = [m.id for m in models_response.data]
-                print("Available OpenAI Models:")
-                for mid in sorted(model_ids):
-                    print(f"  - {mid}")
-                return
-            except Exception as e:
-                raiseError(f"Failed to list models: {str(e)}")
-                return
-        
-        chatCompletionModelList = ("gpt-4o","gpt-4o-2024-08-06","gpt-4o-2024-05-13","gpt-4o-mini","gpt-4o-mini-2024-07-18","gpt-4-turbo","gpt-4-turbo-2024-04-09","gpt-4-turbo-preview","gpt-4-0125-preview","gpt-4-1106-preview","gpt-4","gpt-4-0613","gpt-4-32k","gpt-4-32k-0613","gpt-3.5-turbo","gpt-3.5-turbo-0125","gpt-3.5-turbo-1106","gpt-3.5-turbo-16k","gpt-3.5-turbo-16k-0613","gpt-3.5-turbo-instruct")        
-        completionModelList = ("text-davinci-003","text-davinci-002","text-curie-001","text-babbage-001","text-ada-001","davinci-002","babbage-002")
+        chatCompletionModelList = ("gpt-4o","gpt-4o-2024-05-13","gpt-40","gpt-4-1106-preview","gpt-4-0125-preview","gpt-4-turbo-preview","gpt-4-turbo-2024-04-09","gpt-4-turbo","gpt-4","gpt-4-0613","gpt-3.5-turbo","gpt-3.5-turbo-instruct","gpt-3.5-turbo-0613","gpt-3.5-turbo-0125","gpt-3.5-turbo-1106","gpt-3.5-turbo-16k","gpt-3.5-turbo-16k-0613")        
+        completionModelList = ("text-davinci-001","text-davinci-002","text-davinci-003","text-curie-001","text-babbage-001","text-ada-001","davinci","curie","babbage","ada","babbage-002","davinci-002")
         
         editModelList = ("text-davinci-edit-001","code-davinci-edit-001")
         
-        dallEModelList = ("dall-e-3","dall-e-2")
+        #TBD: dallEModelList = ("dall-e-3","dall-e-2")
         
-        ttsModelList = ("tts-1","tts-1-hd")
+        #TBD: ttsModelList = ("tts-1","tts-1-hd")
         
-        embeddingModelList = ("text-embedding-3-large","text-embedding-3-small","text-embedding-ada-002")
+        '''
+        Embedding doesnt work in latest Splunk 9.0.5 due to numpy dependency on python version 3.8+ 
+        embeddingModelList = ("text-embedding-ada-002", "text-search-ada-doc-001")
+        '''
         
-        moderationModelList = ("omni-moderation-latest","omni-moderation-2024-09-26","text-moderation-stable","text-moderation-latest")
+        moderationModelList = ("text-moderation-stable","text-moderation-latest")
    
-        modelList = chatCompletionModelList + completionModelList  + editModelList + moderationModelList + dallEModelList + ttsModelList + embeddingModelList
+        modelList = chatCompletionModelList + completionModelList  + editModelList + moderationModelList # ttsModelList + embeddingModelList + dallEModelList
 
 
         '''Setting defaults for the request, to be overriden by options passed to the command'''
@@ -273,11 +253,21 @@ def execute():
             raiseError(e)
             exit(5)
 
+
+
+        '''
+        Get the previous search results and search settings (enables streaming support, nothing burger if results dont exist)
+        '''
+        results,dummyresults,settings = splunk.Intersplunk.getOrganizedResults()
+        sessionKey = settings.get("sessionKey")
         if not sessionKey:
             e=exitCodes[7]
             raiseError(e)
             exit(7)
 
+        '''
+        Feature request to support multiple api keys
+        '''
         orgName = None
         keyName = None
         if 'org' in options:
